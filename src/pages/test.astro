@@ -1,0 +1,24 @@
+---
+// Parent component
+interface DiscussionTopic {
+  id: number;
+  date: string;
+  user: string;
+  title: string;
+  tags: string;
+  description: string;
+}
+const response = await fetch("https://67623fba46efb3732374020a.mockapi.io/slowcialapi/Discussion");
+const topics:DiscussionTopic[]  = await response.json();
+
+
+
+// topics.map((topic: DiscussionTopic) => ({
+//     params: { id: topic.id },
+//     props: { date: topic.date, user: topic.user },
+//   }));
+---
+
+<ul>
+  {topics.map((topic) => <li>{topic.date}</li>)}
+</ul>

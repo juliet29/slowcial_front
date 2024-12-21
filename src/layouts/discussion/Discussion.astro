@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro"
+import Topic from "../../components/discussion/Topic.astro"
+import Response from "../../components/discussion/Response.astro"
+
+
+interface Props {
+    id: number;
+    date: string;
+    user: string;
+    title: string;
+    tags: string;
+    description: string;
+  }
+
+
+const {id, date, user, title, tags, description} = Astro.props
+
+// TODO should be pulling some data here..
+---
+<BaseLayout title="Generic Discussion Page">
+    <p>{date} | {user} | {tags}</p>
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <p>the topics will go here!</p>
+    <!-- <Response></Response> -->
+</BaseLayout>
+

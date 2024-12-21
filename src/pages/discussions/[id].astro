@@ -1,5 +1,7 @@
 ---
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import Discussion from "../../layouts/discussion/Discussion.astro";
+import { config } from "../../config";
 
 interface DiscussionTopic {
   id: number;
@@ -10,7 +12,7 @@ interface DiscussionTopic {
   description: string;
 }
 
-const response: Response = await fetch("https://67623fba46efb3732374020a.mockapi.io/slowcialapi/Discussion");
+const response: Response = await fetch(`${config.apiRoot}/Discussion`);
 const topics: DiscussionTopic[] = await response.json();
 
 topics.map((topic) => ({
@@ -18,16 +20,13 @@ topics.map((topic) => ({
 }));
 
 const { id } = Astro.params;
-const curr_topic = topics.find((curr_topic) => String(curr_topic.id)=== id!);
+const curr_topic = topics.find((curr_topic) => String(curr_topic.id) === id!);
 if (!curr_topic) return Astro.redirect("/404");
+
+
+
 ---
 
-<div>
-  <p>"Page for a specific discussion"</p>
-  <p>{curr_topic.id} | {curr_topic.date} | {curr_topic.user}</p>
-  <!-- <ul>
-      {topic.map((t) => (
-        <li>{t}</li>
-      ))}
-    </ul> -->
-</div>
+<BaseLayout title={`Discussion #${id}`}>
+  <Discussion {...curr_topic} />
+</BaseLayout>

@@ -18,11 +18,8 @@ const {id, date, user, title, tags, description} = Astro.props
 
 // TODO should be pulling some data here..
 ---
-<BaseLayout title="Generic Discussion Page">
-    <p>{date} | {user} | {tags}</p>
-    <h2>{title}</h2>
-    <p>{description}</p>
-    <p>the topics will go here!</p>
+<div>
+  <Topic {...Astro.props}></Topic>
     <!-- <Response></Response> -->
-</BaseLayout>
+</div>
 

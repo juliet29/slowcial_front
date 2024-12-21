@@ -1,5 +1,8 @@
 # Slowcial_Front
 
+Latest build is live at [slowcialfront.netlify.app](https://slowcialfront.netlify.app).
+
+
 ## Helpful Notes from Astro 
 
 ### 🚀 Project Structure

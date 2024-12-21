@@ -1,6 +1,7 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import { config } from "../../config";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import Topic from "../../components/discussion/Topic.astro";
 import Response from "../../components/discussion/Response.astro";
@@ -37,7 +38,6 @@ if (!currTopic) return Astro.redirect("/404");
 
 const response2: Response = await fetch(`${config.apiRoot}/Discussion/${id}/Response`);
 const topicResponses: topicResponse[] = await response2.json();
-const myArr = ["he", "she", "they"];
 ---
 
 <BaseLayout title={`Discussion #${id}`}>

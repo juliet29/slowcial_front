@@ -1,5 +1,6 @@
 ---
 import Heading from "./Heading.astro";
+import { limitTextCharacters } from "../../helpers/helpers";
 
 interface Props {
     date: string;
@@ -11,12 +12,11 @@ interface Props {
 }
 
 
-
-const { date, user, title, tags, description, references } = Astro.props;
+const {description, references } = Astro.props;
 ---
 
-<div>
+<div class="mb-6 ml-6 border-l-2 border-black pl-2">
   <Heading {...Astro.props} />
-  <p>{description}</p>
-  <p>{references}</p>
+  <p class="text-sm">{limitTextCharacters(description, 250)}</p>
+  <!-- <p class="text-sm mt-2">{references}</p> -->
 </div>

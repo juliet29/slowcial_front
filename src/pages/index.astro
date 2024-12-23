@@ -1,33 +1,25 @@
 ---
 import { config } from "../config";
 
-import BaseLayout from "../layouts/BaseLayout.astro"
-
-interface DiscussionTopic {
-  id: number;
-  date: string;
-  user: string;
-  title: string;
-  tags: string;
-  description: string;
-}
-
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const response: Response = await fetch(`${config.apiRoot}/Discussion`);
 const topics: DiscussionTopic[] = await response.json();
 ---
+
 <BaseLayout title="Index">
-	<h1 class="font-bold text-xl text-center">Welcome to the home page of Slowcial Media!</h1>
-	<p class="text-lg text-center mb-4">We are glad to see you. Check out some discussions.</p>
+  <h1 class="font-bold text-xl text-center">Welcome to the home page of Slowcial Media!</h1>
+  <p class="text-lg text-center mb-4">We are glad to see you. Check out some discussions.</p>
 
-	<ul class="mt-4 text-center list-inside mx-6 ">
-		{
-		  topics.map((item) => (
-			<li class="mb-4">
-			  <a class="underline" href={`discussions/${item.id}`}>{item.user} - {item.title} </a>
-			</li>
-		  ))
-		}
-	  </ul>
+  <ul class="mt-4 text-center list-inside mx-6">
+    {
+      topics.map((item) => (
+        <li class="mb-4">
+          <a class="underline" href={`discussions/${item.id}`}>
+            {item.user} - {item.title}{" "}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
-

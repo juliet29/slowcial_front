@@ -1,11 +1,15 @@
 import React, { useRef } from "react";
+import Heading from "./Heading.tsx";
+import { limitTextCharacters } from "../../helpers/helpers";
 
-const TopicResponse: React.FC = () => {
+interface Props extends DiscussionResponse {}
+
+const TopicResponse: React.FC<Props> = ({ description, references, ...props }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const handleOpen = () => {
     const dialogElement = dialogRef.current;
-    dialogElement?.show();
+    dialogElement?.showModal();
   };
 
   const handleClose = () => {
@@ -15,15 +19,22 @@ const TopicResponse: React.FC = () => {
 
   return (
     <div>
-      <div className="bg-blue-300 p-2 my-4">
-        <p>Main body </p>
-        <button className="bg-blue-600 p-1" onClick={handleOpen}>
-          Open me!
+      <div className="mb-8 ml-6 border-l-2 border-black pl-2">
+        <Heading {...props} />
+        <p className="text-sm mb-4">{limitTextCharacters(description, 250)}</p>
+        <button className="text-sm py-1 mb-2 underline" onClick={handleOpen}>
+          Read More
         </button>
       </div>
-      <dialog className="bg-pink-500 p-2 my-4" ref={dialogRef}>
-        <p>The dialog!</p>
-        <button onClick={handleClose}>Close me</button>
+      <dialog ref={dialogRef}>
+        <div className="p-4">
+          <Heading {...props} />
+          <p className="text-sm mb-4">{description}</p>
+          <p className="text-sm my-2">{"References: " + references}</p>
+          <button className="p-1 bg-blue-400" onClick={handleClose}>
+            Close
+          </button>
+        </div>
       </dialog>
     </div>
   );

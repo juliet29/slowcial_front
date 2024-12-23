@@ -4,7 +4,8 @@ import { config } from "../../config";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import Topic from "../../components/discussion/Topic.astro";
-import Response from "../../components/discussion/Response.astro";
+import TopicResponse from "../../components/discussion/Response.tsx";
+// import Response from "../../components/discussion/Response.astro";
 
 const response: Response = await fetch(`${config.apiRoot}/Discussion`);
 const topics: DiscussionTopic[] = await response.json();
@@ -28,7 +29,7 @@ const topicResponses: DiscussionResponse[] = await response2.json();
       {
         topicResponses.map((item) => (
           <li>
-            <Response {...item} />
+            <TopicResponse client:load/>
           </li>
         ))
       }

@@ -6,25 +6,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Topic from "../../components/discussion/Topic.astro";
 import Response from "../../components/discussion/Response.astro";
 
-interface DiscussionTopic {
-  id: number;
-  date: string;
-  user: string;
-  title: string;
-  tags: string;
-  description: string;
-}
-
-interface topicResponse {
-  id: number;
-  date: string;
-  user: string;
-  title: string;
-  tags: string;
-  description: string;
-  references: string;
-}
-
 const response: Response = await fetch(`${config.apiRoot}/Discussion`);
 const topics: DiscussionTopic[] = await response.json();
 
@@ -37,7 +18,7 @@ const currTopic = topics.find((curr_topic) => String(curr_topic.id) === id!);
 if (!currTopic) return Astro.redirect("/404");
 
 const response2: Response = await fetch(`${config.apiRoot}/Discussion/${id}/Response`);
-const topicResponses: topicResponse[] = await response2.json();
+const topicResponses: DiscussionResponse[] = await response2.json();
 ---
 
 <BaseLayout title={`Discussion #${id}`}>

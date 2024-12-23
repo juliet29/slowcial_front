@@ -12,6 +12,7 @@ interface DiscussionTopic {
   description: string;
 }
 
+
 const response: Response = await fetch(`${config.apiRoot}/Discussion`);
 const topics: DiscussionTopic[] = await response.json();
 ---

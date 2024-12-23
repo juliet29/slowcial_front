@@ -2,19 +2,12 @@
 import Heading from "./Heading.astro";
 import { limitTextCharacters } from "../../helpers/helpers";
 
-interface Props {
-  date: string;
-  user: string;
-  title: string;
-  tags: string;
-  description: string;
-  references: string;
-}
+interface Props extends DiscussionResponse {}
 
 const { description, references } = Astro.props;
 ---
 
-<div class="mb-8 ml-6 border-l-2 border-black pl-2 ">
+<div class="mb-8 ml-6 border-l-2 border-black pl-2">
   <Heading {...Astro.props} />
   <p class="text-sm mb-4">{limitTextCharacters(description, 250)}</p>
   <a class="text-sm bg-sky-950 text-white px-2 py-1 mb-2" href="/404">Read More</a>

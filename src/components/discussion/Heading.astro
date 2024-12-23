@@ -1,12 +1,7 @@
 ---
 import { convertIsoDate } from "../../helpers/helpers";
 
-interface Props {
-  date: string;
-  user: string;
-  title: string;
-  tags: string;
-}
+interface Props extends DiscussionHeading {}
 
 const { date, user, title, tags } = Astro.props;
 ---

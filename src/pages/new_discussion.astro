@@ -1,0 +1,15 @@
+---
+import TextEditor from "../components/entry/TextEditor";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="New Discussion" >
+  <div class="text-center mb-2">
+    <h1 class="text-xl">New Discussion</h1>
+    <p>Start a new discussion based on some guidelines we will render from static markdown files.</p>
+   
+  </div>
+  <TextEditor client:only="react" />
+
+  <p class="text-center my-4"> Thank you for your contributions!</p>
+</BaseLayout>

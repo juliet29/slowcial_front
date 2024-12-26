@@ -1,6 +1,5 @@
 ---
 import TextEditor from "../components/entry/TextEditor";
-import VanillaTextEditor from "../components/entry/VanillaTextEditor.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
@@ -10,7 +9,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <p>Start a new discussion based on some guidelines we will render from static markdown files.</p>
   </div>
   <TextEditor client:only="react" />
-  <!-- <VanillaTextEditor/> -->
 
   <p class="text-center my-4">Thank you for your contributions!</p>
 </BaseLayout>

@@ -9,26 +9,33 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import ToolbarPlugin from "./ToolbarPlugin";
 import { ParagraphNode, TextNode } from "lexical";
 import ExampleTheme from "./ExampleTheme";
-import './styles.css';
+import "./styles.css";
+import { BeautifulMentionsPlugin, BeautifulMentionNode } from "lexical-beautiful-mentions";
 
 interface Props {}
 
+const mentionItems = {
+  "@": ["Anton", "Boris", "Catherine", "Dmitri", "Elena", "Felix", "Gina"],
+  "#": ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape"],
+  "due:": ["Today", "Tomorrow", "01-01-2023"],
+};
+
 const editorConfig = {
   namespace: "React.js Demo",
-  nodes: [ParagraphNode, TextNode],
+  nodes: [ParagraphNode, TextNode, BeautifulMentionNode],
   onError(error: Error) {
     throw error;
   },
   theme: ExampleTheme,
 };
 
-const placeholder = "Enter some rich text...";
+const placeholder = "Enter some rich text... or a @mention or #hashtag!";
 
 const TextEditor: React.FC<Props> = () => {
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container relative leading-5 mx-20">
-        <ToolbarPlugin />
+        {/* <ToolbarPlugin /> */}
         <div className="editor-inner relative">
           <RichTextPlugin
             contentEditable={
@@ -42,6 +49,9 @@ const TextEditor: React.FC<Props> = () => {
           />
           <HistoryPlugin />
           <AutoFocusPlugin />
+          <BeautifulMentionsPlugin // 👈 add the mentions plugin
+            items={mentionItems}
+          />
         </div>
       </div>
     </LexicalComposer>

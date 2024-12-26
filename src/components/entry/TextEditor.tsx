@@ -1,11 +1,53 @@
-import { MDXEditor, headingsPlugin, markdownShortcutPlugin, linkPlugin} from "@mdxeditor/editor";
-import "@mdxeditor/editor/style.css";
+import React, { useMemo } from "react";
+import { type InitialConfigType, LexicalComposer } from "@lexical/react/LexicalComposer";
+import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 
 interface Props {}
+
 const TextEditor: React.FC<Props> = () => {
+  const CustomContent = useMemo(() => {
+    return (
+      <ContentEditable
+        style={{
+          position: "relative",
+          borderColor: "rgba(255,211,2,0.68)",
+          border: "2px solid red",
+          borderRadius: "5px",
+          maxWidth: "100%",
+          padding: "10px",
+        }}
+      />
+    );
+  }, []);
+
+  const CustomPlaceholder = useMemo(() => {
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: 30,
+          left: 30,
+        }}
+      >
+        Enter some text...
+      </div>
+    );
+  }, []);
+
+  const lexicalConfig: InitialConfigType = {
+    namespace: "My Rich Text Editor",
+    onError: (e) => {
+      console.log("ERROR:", e);
+    },
+  };
+
   return (
-    <div>
-      <MDXEditor markdown={"# Hello World"} className="border " plugins={[headingsPlugin(), linkPlugin(), markdownShortcutPlugin()]} />
+    <div style={{ padding: "20px" }}>
+      <LexicalComposer initialConfig={lexicalConfig}>
+        <PlainTextPlugin contentEditable={CustomContent} placeholder={CustomPlaceholder} ErrorBoundary={LexicalErrorBoundary} />
+      </LexicalComposer>
     </div>
   );
 };
